@@ -20,5 +20,6 @@ ff_mom_df = ff_momentum[0]
 ff_merged_df = pd.merge(ff_df, ff_mom_df, on='Date', how='inner', sort=True, copy=True, indicator=False, validate='one_to_one')
 
 ### Not working IDK why ###
-NVDA_data = web.DataReader('NVDA', 'yahoo', 'start', 'end')['Adj Close']
-NVDA_data.head()
+NVDA_data = yf.download('NVDA', start, end)['Adj Close']
+print(NVDA_data.head())
+

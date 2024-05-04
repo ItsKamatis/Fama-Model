@@ -20,6 +20,8 @@ ff_mom_df = ff_momentum[0]
 ff_merged_df = pd.merge(ff_df, ff_mom_df, on='Date', how='inner', sort=True, copy=True, indicator=False, validate='one_to_one')
 
 ### Not working IDK why ###
-NVDA_data = yf.download('NVDA', start, end)['Adj Close'] ###fixed
+NVDA_data = yf.download('NVDA', start, end)['Adj Close'].resample('ME').ffill().pct_change() ###fixed
 ###print(NVDA_data.head())
+NVDA_df = NVDA_data.to_frame()
+print(NVDA_df.head())
 

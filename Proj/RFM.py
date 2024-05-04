@@ -1,7 +1,7 @@
 import pandas_datareader
 import pandas as pd
 import matplotlib.pyplot as plt
-
+!pip install yfinance
 pandas_datareader.famafrench.get_available_datasets()
 start = '2021-12-01'
 ff = pandas_datareader.famafrench.FamaFrenchReader('F-F_Research_Data_Factors', freq='W', start=start).read()

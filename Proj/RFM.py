@@ -77,7 +77,13 @@ NVDA_FF_Merge_df_constant = statsmodels.tools.add_constant(NVDA_FF_Merge_df, pre
 
 
 results = OLS(NVDA_FF_Merge_df_constant['NVDA_RF'], NVDA_FF_Merge_df_constant[['const', 'Mkt-RF', 'SMB', 'HML', 'MOM']], missing='drop').fit()
-print(results.summary())
+print(results.summary()) #What does this regression show? What do the coefficients mean?
+#The regression shows the results of regressing NVDA excess returns on the Fama-French factors and the momentum factor.
+# The coefficients represent the estimated effect of each factor on NVDA excess returns.
+# The Mkt-RF factor has a positive coefficient, indicating that NVDA excess returns tend to increase when the market return is higher.
+# The SMB and HML factors have negative coefficients, indicating that NVDA excess returns tend to decrease when the size and value factors are higher.
+# The momentum factor has a positive coefficient, indicating that NVDA excess returns tend to increase when the momentum factor is higher.
+# The R-squared value of the regression is 0.648, indicating that the model explains 64.8% of the variation in NVDA excess returns.
 
 ##Run a regression of NVDA excess returns on the Fama-French factors and the momentum factor. What do you find?
 
@@ -86,4 +92,6 @@ NVDA_FF_Merge_df_constant['Predicted'] = results.predict(NVDA_FF_Merge_df_consta
 NVDA_FF_Merge_df_constant[['NVDA_RF', 'Predicted']].plot(figsize=(12,8))
 plt.show()
 #What does this plot show? What does the model predict? How well does it fit the data?
-#The plot shows the actual NVDA excess returns and the predicted excess returns from the regression model. The model predicts the NVDA excess returns based on the Fama-French factors and the momentum factor. The model fits the data well, as the predicted values closely match the actual values.
+#The plot shows the actual NVDA excess returns and the predicted excess returns from the regression model.
+# The model predicts the NVDA excess returns based on the Fama-French factors and the momentum factor.
+# The model fits the data well, as the predicted values closely match the actual values.

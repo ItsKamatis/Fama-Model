@@ -79,3 +79,11 @@ NVDA_FF_Merge_df_constant = statsmodels.tools.add_constant(NVDA_FF_Merge_df, pre
 results = OLS(NVDA_FF_Merge_df_constant['NVDA_RF'], NVDA_FF_Merge_df_constant[['const', 'Mkt-RF', 'SMB', 'HML', 'MOM']], missing='drop').fit()
 print(results.summary())
 
+##Run a regression of NVDA excess returns on the Fama-French factors and the momentum factor. What do you find?
+
+NVDA_FF_Merge_df_constant['Predicted'] = results.predict(NVDA_FF_Merge_df_constant[['const', 'Mkt-RF', 'SMB', 'HML', 'MOM']])
+
+NVDA_FF_Merge_df_constant[['NVDA_RF', 'Predicted']].plot(figsize=(12,8))
+plt.show()
+#What does this plot show? What does the model predict? How well does it fit the data?
+#The plot shows the actual NVDA excess returns and the predicted excess returns from the regression model. The model predicts the NVDA excess returns based on the Fama-French factors and the momentum factor. The model fits the data well, as the predicted values closely match the actual values.

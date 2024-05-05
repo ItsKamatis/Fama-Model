@@ -23,5 +23,23 @@ ff_merged_df = pd.merge(ff_df, ff_mom_df, on='Date', how='inner', sort=True, cop
 NVDA_data = yf.download('NVDA', start, end)['Adj Close'].resample('ME').ffill().pct_change() ###fixed
 ###print(NVDA_data.head())
 NVDA_df = NVDA_data.to_frame()
-print(NVDA_df.head())
+##NVDA_df.dropna(inplace=True) dropna creates shape mismatch
+##print(NVDA_df.head())
 
+
+
+#Converting date formatting in both dataframes
+#print(NVDA_df.index.dtype)
+#print(ff_merged_df.index.dtype)
+
+NVDA_df['str_date'] =NVDA_data.index.astype(str)
+NVDA_df['dt_date'] = pd.to_datetime(NVDA_df.str_date).dt.strftime('%Y-%m')
+#print(NVDA_df.dt_date.dtype)
+
+ff_merged_df['str_date'] = ff_merged_df.index.astype(str)
+ff_merged_df['dt_date'] = pd.to_datetime(ff_merged_df.str_date).dt.strftime('%Y-%m')
+#print(ff_merged_df.dt_date.dtype)
+
+#Performing Merge
+
+NVDA_FF_Merge_df = pd.merge(NVDA_df, ff_merged_df, how = 'inner', on = 'dt_date', sort=True, copy=True, indicator=False, validate='one_to_one')

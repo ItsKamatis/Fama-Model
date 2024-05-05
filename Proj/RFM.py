@@ -4,7 +4,11 @@ import pandas_datareader.data as web
 import matplotlib.pyplot as plt
 import yfinance as yf
 import datetime as dt
+from statsmodels.api import OLS
+import statsmodels.tools
 yf.pdr_override()
+
+
 pdr.famafrench.get_available_datasets()
 start = dt.datetime(2020, 1, 1)
 end = dt.datetime.today()
@@ -51,9 +55,27 @@ NVDA_FF_Merge_df.rename(columns={"Adj Close": "NVDA"}, inplace=True)
 
 ##print(NVDA_FF_Merge_df.head())
 
-NVDA_FF_Merge_df['NNDA_RF'] = NVDA_FF_Merge_df['NVDA']*100-NVDA_FF_Merge_df['RF']
+NVDA_FF_Merge_df['NVDA_RF'] = NVDA_FF_Merge_df['NVDA']*100-NVDA_FF_Merge_df['RF']
 #print(NVDA_FF_Merge_df.head())
 
 NVDA_FF_Merge_df.dropna(axis=0, inplace=True)
-print(NVDA_FF_Merge_df.head())
+#print(NVDA_FF_Merge_df.head())
+
+#results = OLS(NVDA_FF_Merge_df['NVDA_RF'], NVDA_FF_Merge_df[['Mkt-RF', 'SMB', 'HML', 'Mom']], missing='drop').fit() #mom not in DF
+#print(list(NVDA_FF_Merge_df))
+NVDA_FF_Merge_df.rename(columns={'Mom   ': 'MOM'}, inplace=True)
+#print(list(NVDA_FF_Merge_df))
+
+#results = OLS(NVDA_FF_Merge_df['NVDA_RF'], NVDA_FF_Merge_df[['Mkt-RF', 'SMB', 'HML', 'MOM']], missing='drop').fit()
+
+##print(results.summary())
+
+NVDA_FF_Merge_df_constant = statsmodels.tools.add_constant(NVDA_FF_Merge_df, prepend=True)
+
+#print(NVDA_FF_Merge_df_constant.head())
+#print(list(NVDA_FF_Merge_df_constant))
+
+
+results = OLS(NVDA_FF_Merge_df_constant['NVDA_RF'], NVDA_FF_Merge_df_constant[['const', 'Mkt-RF', 'SMB', 'HML', 'MOM']], missing='drop').fit()
+print(results.summary())
 

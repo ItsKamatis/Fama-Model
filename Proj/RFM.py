@@ -43,3 +43,17 @@ ff_merged_df['dt_date'] = pd.to_datetime(ff_merged_df.str_date).dt.strftime('%Y-
 #Performing Merge
 
 NVDA_FF_Merge_df = pd.merge(NVDA_df, ff_merged_df, how = 'inner', on = 'dt_date', sort=True, copy=True, indicator=False, validate='one_to_one')
+
+#print(NVDA_FF_Merge_df.head())
+
+NVDA_FF_Merge_df.drop(columns=['str_date_x', 'str_date_y'], inplace=True)
+NVDA_FF_Merge_df.rename(columns={"Adj Close": "NVDA"}, inplace=True)
+
+##print(NVDA_FF_Merge_df.head())
+
+NVDA_FF_Merge_df['NNDA_RF'] = NVDA_FF_Merge_df['NVDA']*100-NVDA_FF_Merge_df['RF']
+#print(NVDA_FF_Merge_df.head())
+
+NVDA_FF_Merge_df.dropna(axis=0, inplace=True)
+print(NVDA_FF_Merge_df.head())
+

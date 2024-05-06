@@ -12,7 +12,7 @@ yf.pdr_override()
 pdr.famafrench.get_available_datasets()
 start = dt.datetime(2020, 1, 1)
 end = dt.datetime.today()
-stock = 'AAPL'
+stock = 'FDGRX'
 
 ff = pdr.famafrench.FamaFrenchReader('F-F_Research_Data_Factors', freq='M', start=start).read()
 ff_df = ff[0]
@@ -46,3 +46,4 @@ stock_FF_Merge_df_constant['Predicted'] = results.predict(stock_FF_Merge_df_cons
 
 stock_FF_Merge_df_constant[['Stock_RF', 'Predicted']].plot(figsize=(12,8))
 plt.show()
+

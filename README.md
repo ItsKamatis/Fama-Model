@@ -13,7 +13,7 @@ This repository contains a Python script designed for financial modeling and sto
 To run this project, you will need Python installed on your system. Python 3.8 or above is recommended. You can download Python from [here](https://www.python.org/downloads/).
 
 Once Python is installed, clone this repository to your local machine:
-git clone https://github.com/ItsKamatis/pythonProject
+git clone https://github.com/ItsKamatis/Fama-Model.git
 
 ## Usage
 To run the script, navigate to the repository directory and execute the following command in the terminal:

@@ -29,5 +29,5 @@ Contributions to this project are welcome. Please fork the repository, make your
 This project is licensed under the MIT License - see the (LICENSE.md) file for details.
 
 ## Contact
-If you have any questions, please feel free to contact me via email at [REDACTED@gmail.com].
+If you have any questions, please feel free to contact me via email at [REDACTED].
 
